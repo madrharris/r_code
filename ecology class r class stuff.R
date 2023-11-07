@@ -2,8 +2,9 @@
 #
 #   ecology class r class stuff
 #
-##require(Rcmdr)
-##install.packages("Rcmdr")
+###### Duck Lake
+####    Packet stuff
+        # scatterplot, linear regression models, t-test, box plots, p-values and modeling
 
 install.packages("readr")
 install.packages("ggplot2")

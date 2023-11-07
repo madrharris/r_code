@@ -2,6 +2,10 @@
 
 ## "library" of ggplot stuff and copy/paste code
 
+#++++++++++++++++++
+#+  box plot, scatter plot, bar graph
+#+  https://r-graph-gallery.com/
+
 #########################################
 library(ggplot2)
 library(cowplot)
@@ -325,16 +329,6 @@ scale_fill_manual(values=c(''))  # write name of color, or use hex code
 
 scale_fill_brewer(palette='') # requires RColorBrewer package. google palette names
   # examples: PuBuGn, purple, blue, green gradient. Set1-3, Spectral, PiYG, Greens, Reds, Blues, greyscale, etc. 
-
-
-
-
-  
-
-
-
-
-
 
 
 
