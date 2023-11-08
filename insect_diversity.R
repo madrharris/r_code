@@ -8,6 +8,8 @@ cover <- c(19,43,20,7,16,2,7,46,66,73,74,71,79,83,86,68)
 diversity <- c(0.401,1.082,1.296,1.4,0.127,1.166,0.149,1.0507,1.13,1.67,1.2009,1.208,1.309,1.6,1.563,1.483)
 insect <- data.frame(treatment, cover, diversity)
 
+View(insect)
+
 t.test(insect$diversity, insect$cover, paired = TRUE)
 
 error = stat_boxplot(geom = "errorbar", # Error bars
@@ -38,6 +40,9 @@ line = ggplot(insect, aes(x=cover, y = diversity, col = treatment))+
   ggtitle("Insect Diversity Caught per Canopy Treatment")+
   theme(plot.title = element_text(size = 20))+
   theme_bw()
+
+line
+box
 
 ggplot(insect, aes(x=treatment))+
   geom_histogram()+

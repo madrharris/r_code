@@ -142,6 +142,7 @@ tree_radial
 ttest_tree = t.test(tree_radial_growth ~ tree_id, tree_growth, paired = FALSE)
 ttest_tree
 
+View(tree_radial_growth)
 
 #######
 # pinecone experiment during class

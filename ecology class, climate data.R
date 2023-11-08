@@ -63,6 +63,38 @@ all_together = plot_grid(temp, swe, precip, ncol=3, nrow = 1)
 all_together
 
 
+## axis switched
+
+## graph to compare core width and cum precip
+precip = ggplot(tree_core, aes(y=ring_width,x=cum_precip))+
+  geom_point(size=2)+
+  labs(y="Core Width (mm)", x="Cumulative Precipitarion")+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_classic()
+precip
+
+## graph to compare core width and max swe
+swe = ggplot(tree_core, aes(y=ring_width, x=max_swe))+
+  geom_point(size=2)+
+  labs(y="Core Width (mm)", x="Maximum Snow Water Equivalent")+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_classic()
+swe
+
+## graph to compare core width and temperature
+temp = ggplot(tree_core, aes(y=ring_width, x=mean_temp))+
+  geom_point(size=2)+
+  labs(y="Core Width (mm)", x="Temperature Mean, Annual (C)")+
+  geom_smooth(method = "lm", se = FALSE)+
+  theme_classic()
+temp
+
+head(tree_core)
+
+library(cowplot)
+all_together = plot_grid(temp, swe, precip, ncol=3, nrow = 1)
+all_together
+
 year_core
 core_temp
 core_precip
@@ -82,6 +114,7 @@ summary(model)
 ##### multiple regression analysis
 model_3 = lm(ring_width ~ mean_temp + cum_precip + snow_disap, data = tree_core)
 summary(model_3)
+
 
 ## the later the snow melts, the more growth we see. Slope of 4.174e-03
 
