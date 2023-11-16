@@ -8,6 +8,8 @@
 ## Bar Plot (more advanced than what's in the ggplot library)
 #     see stacked and grouped in ggplot_library
 
+
+
 ####### Percent Stacked
 specie <- c(rep("sorgho" , 3) , rep("poacee" , 3) , rep("banana" , 3) , rep("triticum" , 3) )
 condition <- rep(c("normal" , "stress" , "Nitrogen") , 4)
