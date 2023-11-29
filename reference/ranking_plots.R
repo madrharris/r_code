@@ -15,6 +15,8 @@ library(gt)
 
 ## GT tables
 
+
+
 # Create a data frame to use, or use a preexisting one
 
 data = data.frame(

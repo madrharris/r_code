@@ -211,9 +211,9 @@ ggplot(data=df2, aes(x=dose, y=len, fill=supp)) +
 ## change colors
 ggplot(data=df2, aes(x=dose, y=len, fill=supp)) +
   geom_bar(stat="identity", color="black", position=position_dodge())+
-  theme_minimal()
+  theme_minimal()+
       ## black outline
-+ scale_fill_manual(values=c('#999999','#E69F00'))
+ scale_fill_manual(values=c('#999999','#E69F00'))
       ## fill with custom colors
 
 
