@@ -8,7 +8,7 @@ cover <- c(19,43,20,7,16,2,7,46,66,73,74,71,79,83,86,68)
 diversity <- c(0.401,1.082,1.296,1.4,0.127,1.166,0.149,1.0507,1.13,1.67,1.2009,1.208,1.309,1.6,1.563,1.483)
 insect <- data.frame(treatment, cover, diversity)
 
-View(insect)
+head(insect)
 
 t.test(insect$diversity, insect$cover, paired = TRUE)
 
@@ -16,6 +16,14 @@ error = stat_boxplot(geom = "errorbar", # Error bars
                      width = 0.25)    # Bars width
 insect$treatment = as.character(insect$treatment)
 
+new_split_insect <- split(insect, f = insect$treatment)   
+View(new_split_insect)
+split_data[["macroinvertebrate"]]
+split_data[["macrophyte"]]
+var(new_split_insect$1$cover)
+
+
+var(19,43,20,7,16,2,7,46)
 
 ## ggplot
 
@@ -32,12 +40,13 @@ box = ggplot(insect, aes(treatment, diversity, fill = treatment)) +
   theme_bw() ### theme
 
 line = ggplot(insect, aes(x=cover, y = diversity, col = treatment))+
-  geom_line()+geom_point(size=2)+
+  geom_point(size=2)+
   scale_color_manual(labels = c("Sagebrush", "Tree Cover"),values = c("red","royalblue"))+
   scale_fill_hue(labels = c("Sagebrush", "Tree Cover"))+
   guides(col = guide_legend(title = "Treatment"))+
   labs(x="Percent Canopy Cover", y="Diversity")+
   ggtitle("Insect Diversity Caught per Canopy Treatment")+
+  geom_smooth(method="lm", se = FALSE)+
   theme(plot.title = element_text(size = 20))+
   theme_bw()
 
@@ -51,6 +60,16 @@ ggplot(insect, aes(x=treatment))+
 
 plot_grid(line, box,
           ncol = 1, nrow = 2)
+
+
+write.csv(insect, "Desktop\\insect.csv", row.names=FALSE)
+
+
+
+
+
+
+
 
 
 
