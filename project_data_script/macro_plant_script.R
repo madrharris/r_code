@@ -19,7 +19,6 @@ ggplot(plant, aes(x=reorder(site,treatment), y=diversity, col = treatment))+
   theme(legend.position = "Left")
 
 
-x=reorder(cut,price)
 
 ## bar graph
 ggplot(data=plant, aes(x=reorder(site,treatment), y=diversity, fill=treatment)) +
@@ -54,6 +53,9 @@ var(split_data$macroinvertebrate$diversity)
 model = lm(diversity ~ sample, data = t_test_macro)
 summary(model)
 model
+
+plot(model)
+
 
 split_data <- split(plant, f = plant$treatment)   
 View(split_data)
