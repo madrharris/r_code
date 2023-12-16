@@ -35,7 +35,7 @@ ggplot(plant, aes(x=treatment, y=diversity))+
   stat_boxplot(geom="errorbar", width = 0.25)+
   labs(x="Sample Type", y = "Diversity Index")+
   scale_x_discrete(labels=c("Macroinvertebrates","Macrophytes"))+
-  theme_classic()
+  theme(text = element_text(size = 15))
 
 t_test_macro=read.csv("project_data_script/t_testmacro.csv")
 head(t_test_macro)
@@ -54,8 +54,13 @@ model = lm(diversity ~ sample, data = t_test_macro)
 summary(model)
 model
 
-plot(model)
+plot(model, 5)
+par(mfrow=c(2,2))
 
+hats <- as.data.frame(hatvalues(model))
+hats
+
+plot(diversity, xlab = "Site Number",ylab = "Diversity Index")
 
 split_data <- split(plant, f = plant$treatment)   
 View(split_data)
@@ -73,19 +78,20 @@ library(dplyr)
 
 
 test_plant = read.csv("project_data_script/species_count.csv")
+View(test_plant)
 head(test_plant)
 test_plant$site = as.character(test_plant$site)
 
 richness = ggplot(test_plant, aes(x=sample, y=richness))+
   geom_boxplot()+
   labs(x="Sample Type", y="Species Richness")+
-  theme_classic()
+  theme(text = element_text(size = 13))
 abundance = ggplot(test_plant, aes(x=sample, y=abundance))+
   geom_boxplot()+
   labs(x="Sample Type", y="Species Abundance")+
   ylim(0,60)+
-  theme_classic()
-abundance
+  theme(text = element_text(size = 13))
+richness
 library(cowplot)
 richness_abundance = plot_grid(richness, abundance, ncol = 2, nrow= 1)
 richness_abundance

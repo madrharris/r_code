@@ -1,5 +1,6 @@
 ######### 
-# r code for t-test insect data
+# r code for t-test insect data. 
+# Assignment 2
 
 library(ggplot2)
 library(cowplot)
