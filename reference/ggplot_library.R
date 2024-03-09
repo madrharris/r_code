@@ -19,9 +19,104 @@ View(soil_m)
 
 ## ggplot
 
-# must convert X to either FACTOR or AS.CHARACTER
-soil_m = read_csv("monthly soil moisture changes Rstudio.csv", col_types = cols(date = col_datetime(format = "%m/%d/%Y %H:%M")))
-soil_m$month = factor(soil_m$month)
+# must convert X to either FACTOR or AS.CHARACTER       "as.factor()"
+# data = 
+head(mtcars)
+typeof(mtcars$cyl)
+###
+# Most Basic BoxPlot
+
+ggplot(mtcars, aes(x=as.factor(cyl), y=mpg))+      # lays out framework
+  geom_boxplot()
+
+## white boxes on graph. no axis names, no titles, just white
+#### customize: 
+
+ggplot(mtcars, aes(x=as.factor(cyl), y=mpg))+
+  geom_boxplot(fill = "blue", alpha = .3) +## colors the boxes all the same. alpha controls the opacity. 0-1
+  xlab("cyl") ### changes xlabel. this or "labels(c("Label Name Here"))
+
+####   Geom_boxplot() options
+head(mpg)
+
+ggplot(mpg, aes(x=class, y = hwy))+
+  geom_boxplot(
+    
+    # custom boxes
+    color="green", #### this controls the outline
+    fill="pink",   #### this controls the inside
+    alpha=0.6,
+    
+    # Notch? adds a little edge to the box
+    notch=F,
+    notchwidth = 0.8,
+    
+    # custom outliers
+    outlier.colour="red",
+    outlier.fill="red",
+    outlier.size=2
+  )
+
+##### Control colors of different sections
+
+# Set a unique color with fill, colour, and alpha
+    # same for each box
+ggplot(mpg, aes(x=class, y=hwy)) + 
+  geom_boxplot(color="red", fill="orange", alpha=0.2)
+
+# Set a different color for each group. Per a datagroup
+ggplot(mpg, aes(x=class, y=hwy, fill=class)) + 
+  geom_boxplot(alpha=0.3) +
+  theme(legend.position="none") # removes legend
+#       set fill to whatever is being used to separate the groups (x-axis)
+
+# Use a specific palette
+ggplot(mpg, aes(x=class, y=hwy, fill=class)) + 
+  geom_boxplot(alpha=0.6) +
+  theme(legend.position="none") +
+  scale_fill_brewer(palette="BuPu") ## put palette name here
+
+# Different palette
+ggplot(mpg, aes(x=class, y=hwy, fill=class)) + 
+  geom_boxplot(alpha=0.3) +
+  theme(legend.position="none") +
+  scale_fill_brewer(palette="Dark2")
+
+
+#### Grouped boxplot. 2+ boxes per x-axis section
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+
+
+
+
+#
+
+
+
+
+
+#
+
+
+
+#
+
+
+
 
 ggplot(soil_m, aes(x = month, y = soil_moisture, fill = month)) +     ### fill: fills the color based on the X value. needed for legend
   geom_boxplot()+
@@ -35,6 +130,31 @@ ggplot(soil_m, aes(x = month, y = soil_moisture, fill = month)) +     ### fill: 
   theme(legend.position = "bottom")
 
   theme(legend.position = "none")           ## removes legend, but keeps identifier. None, right, left, top, bottom
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -182,6 +302,8 @@ ggplot(df, aes(x=dose, y=len, fill=dose))+
   theme_minimal()
 
 ########## fill vs color. COLOR is outline, FILL is all fill
+
+
 
 
 

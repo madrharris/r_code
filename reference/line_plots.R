@@ -10,12 +10,12 @@ install.packages("ggplot2")
 library(ggplot2)
 # make data
 
-data = data.frame(x=seq(10,100), y=seq(10,100)/2+rnorm(90))
+data = data.frame(bottom=seq(10,100), side=seq(10,100)/2+rnorm(90))
 
 ################      make y logarithmic      #################
 # make plot
 
-ggplot(data, aes(x=x, y=y))+
+ggplot(data, aes(x=bottom, y=side))+
   geom_line()+
   scale_y_log10(breaks=c(1,5,10,15,20,50,100), limits=c(1,100))
 
