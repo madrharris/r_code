@@ -1,12 +1,44 @@
 ########  brundage snowpit data
 
 library(ggplot2)
+library(readxl)
 
-head(Snowpit_data_brundage)
-head(snowpit_data_temp)
 
-pit_brundage = Snowpit_data_brundage
-pit_temp = snowpit_data_temp
+snowpit_temp = read_excel("snowpit_data_temp.xlsx")
+head(Snowpit_brundage)
+
+pit_brundage = Snowpit_brundage
+pit_temp = snowpit_temp
+
+
+library(gt)
+library(dplyr)
+
+pit_brundage %>%
+  gt() %>%
+  tab_footnote(footnote = md("Measured in cm"),
+               locations = cells_column_labels(columns = Layer)) %>%
+  tab_footnote(footnote = md("Measured in grams"),
+               locations = cells_column_labels(columns = Weight)) %>%
+  tab_footnote(footnote = md("Measured in cm"),
+               locations = cells_column_labels(columns = Height)) %>%
+  tab_footnote(footnote = md("Density calculated from a 100 ml tube")) %>%
+  cols_hide(columns = c(Hardness))
+  
+pit_brundage %>%
+  gt() %>%
+  cols_hide(columns = c(Height, Weight, Density)) %>%
+  tab_footnote(footnote = md("Measured in cm"), 
+               locations = cells_column_labels(columns = Layer)) %>%
+  tab_footnote(footnote = md("Measured in cm"), 
+               locations = cells_column_labels(columns = SWE))
+
+
+
+
+
+
+
 
 
 d = 0.8

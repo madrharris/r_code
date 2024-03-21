@@ -12,11 +12,15 @@ yes
 
 long_valley_SNOTEL_data <- read.csv("Downloads/WTEQ-value-SNWD-value-SMS-8-value-txt-csv.csv", 
                                     col_types = cols(`Date 1` = col_skip(), 
-                                                     Good_date = col_date(format = "%Y/%m/%d"), 
-                                                     date = col_skip(), `Date 2` = col_skip()))
+                                                     Good_date = col_date(format = "%Y/%m/%d")))
+
+
 head(long_valley_SNOTEL_data)
 colnames(long_valley_SNOTEL_data) = c("date", "SWE", "snow_depth", "soil_moisture")
-na.omit(long_valley_SNOTEL_data)
+long_valley_SNOTEL_data <- na.omit(long_valley_SNOTEL_data)
+
+
+long_valley_SNOTEL_data$SWE <- long_valley_SNOTEL_data$SWE*0.393701
 
 
 ggplot(long_valley_SNOTEL_data, aes(x=date, y=soil_moisture, group = SWE, color = snow_depth))+
@@ -40,11 +44,11 @@ ggplot(long_valley_SNOTEL_data) +
 
  
 ggplot(long_valley_SNOTEL_data) +
-  geom_line(aes(x=date, y=snow_depth, color = "Snow Depth (in)"))+
-  geom_line(aes(x=date, y=SWE, color = "SWE (in)"))+
+  geom_line(aes(x=date, y=snow_depth, color = "Snow Depth (cm)"))+
+  geom_line(aes(x=date, y=SWE, color = "SWE (cm)"))+
   scale_color_manual(values=c("blue", "red"))+
   labs(color = "")+
-  labs(x = "Date", y = "Measured value at start of month, inches")+
+  labs(x = "Date", y = "Measured value at start of month, cm")+
   theme_bw()
 
 
@@ -95,15 +99,17 @@ summary(model1)
 plot(model1)
 model1
 
+min(na.omit(long_valley_SNOTEL_data$soil_moisture))
+
 ggplot(long_valley_SNOTEL_data, aes(snow_depth, soil_moisture)) +
   geom_point() +
   stat_smooth(method = lm)+
   scale_color_manual(values=c("black"))+
   labs(color = "")+
-  labs(x = "Snow Depth (in)", y = "Soil Moisture (%)")+
+  labs(x = "Snow Depth (cm)", y = "Soil Moisture (%)")+
   theme_bw()
   
-mean(long_valley_SNOTEL_data$soil_moisture, na.rm = T)
+mean(long_valley_SNOTEL_data$snow_depth, na.rm = T)
 12.49/16.80502
 
 
@@ -124,9 +130,20 @@ all_model
 short_model = lm(soil_moisture ~ snow_depth, data = long_valley_SNOTEL_data)
 summary(short_model)
 
+
 plot(all_model)
 par(mfrow=c(2,2))
 
+swe_depth = lm(SWE ~ snow_depth, data = long_valley_SNOTEL_data)
+summary(swe_depth)
 
-ggplot(data = long_valley_SNOTEL_data, aes(x=snow_depth, y=soil_moisture))+
+
+swe_moist = lm(SWE ~ soil_moisture, data = long_valley_SNOTEL_data)
+summary(swe_moist)
+
+
+citation()
+           
+
+               ggplot(data = long_valley_SNOTEL_data, aes(x=snow_depth, y=soil_moisture))+
   geom_line()
